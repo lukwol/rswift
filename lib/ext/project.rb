@@ -38,16 +38,16 @@ module Xcodeproj
     end
 
     def app_scheme_name
+      scheme_name = RSwift::Configuration.new.app_scheme_name
       schemes_names = Xcodeproj::Project.schemes(path)
-      schemes_names.find do |scheme_name|
+      scheme_name ||= schemes_names.find do |scheme_name|
         is_app_scheme(scheme_for_scheme_name(scheme_name))
       end
+      scheme_name
     end
 
     def app_scheme
-      scheme_name = RSwift::Configuration.new.app_scheme_name
-      scheme_name ||= app_scheme_name
-      scheme_for_scheme_name(scheme_name)
+      scheme_for_scheme_name(app_scheme_name)
     end
 
     private
