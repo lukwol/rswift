@@ -1,0 +1,11 @@
+platform :tvos, '9.0'
+use_frameworks!
+
+target '<%= @name %>' do
+  pod 'Reveal-tvOS-SDK', configurations: ['Debug']
+end
+
+target '<%= @name %>Specs' do
+  pod 'Quick'
+  pod 'Nimble'
+end

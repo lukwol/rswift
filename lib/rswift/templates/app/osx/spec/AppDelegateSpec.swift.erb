@@ -1,0 +1,24 @@
+import Quick
+import Nimble
+
+@testable import <%= @name %>
+
+class AppDelegateSpec: QuickSpec {
+
+    override func spec() {
+
+        var sut: AppDelegate!
+
+        beforeEach {
+            sut = AppDelegate()
+        }
+
+        afterEach {
+            sut = nil
+        }
+
+        it("should pass") {
+            expect(true).to(beTruthy())
+        }
+    }
+}
