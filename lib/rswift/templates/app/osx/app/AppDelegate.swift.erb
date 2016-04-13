@@ -5,20 +5,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow?
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as! String
+        guard let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String else {
+            return
+        }
 
         let mainMenu = NSMenu(title: appName)
         let appNameMenuItem = NSMenuItem(title: "", action: nil, keyEquivalent: "")
         let appNameMenu = NSMenu(title: appName)
-        appNameMenu.addItemWithTitle("Quit \(appName)", action: #selector(terminate), keyEquivalent: "q")
+        appNameMenu.addItemWithTitle("Quit \(appName)",
+                action: #selector(terminate), keyEquivalent: "q")
         appNameMenuItem.submenu = appNameMenu
         mainMenu.addItem(appNameMenuItem)
         NSApp.mainMenu = mainMenu
 
         window = NSWindow(contentRect: NSMakeRect(240, 180, 480, 360),
-        styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask,
-        backing: .Buffered,
-        defer: false)
+                styleMask: NSTitledWindowMask | NSClosableWindowMask |
+                        NSMiniaturizableWindowMask | NSResizableWindowMask,
+                backing: .Buffered,
+                defer: false)
         window?.title = appName
         window?.orderFrontRegardless()
     }
